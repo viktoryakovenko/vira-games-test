@@ -10,8 +10,8 @@ namespace Code.UI
         public event Action OnSpinEnded;
 
         public float CurrentRotationSpeed { get; set; }
-        public float InitialRotationSpeed { get; private set; } = 720f;
-        public float DecelerationSpeed { get; set; } = 60f;
+        public float InitialRotationSpeed { get; private set; } = 3600f;
+        public float DecelerationSpeed { get; set; } = 720f;
 
         public void Spin()
         {
@@ -22,11 +22,12 @@ namespace Code.UI
 
         private IEnumerator StartSpin()
         {
-            while (CurrentRotationSpeed >= 0)
+            while (CurrentRotationSpeed > 0)
             {
                 CurrentRotationSpeed -= DecelerationSpeed * Time.deltaTime;
+                CurrentRotationSpeed = Mathf.Max(CurrentRotationSpeed, 0);
 
-                transform.Rotate(Vector3.back, CurrentRotationSpeed * Time.deltaTime);
+                transform.rotation *= Quaternion.Euler(0, 0, CurrentRotationSpeed * Time.deltaTime);
 
                 yield return null;
             }
