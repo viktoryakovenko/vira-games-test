@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Code.Infrastructure.Factory;
+using UnityEngine;
 
-namespace Code.Infrastructure.Factory
+namespace Code.Infrastructure.AssetManagement
 {
     public class AssetProvider : IAssets
     {

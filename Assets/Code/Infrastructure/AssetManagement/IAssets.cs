@@ -1,7 +1,7 @@
 ﻿using Code.Infrastructure.Services;
 using UnityEngine;
 
-namespace Code.Infrastructure.Factory
+namespace Code.Infrastructure.AssetManagement
 {
     public interface IAssets : IService
     {

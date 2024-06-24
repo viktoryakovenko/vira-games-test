@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: skin1
   m_EditorClassIdentifier: 
   Weight: 0
-  IsUnique: 0
-  Count: 0
+  IsUnique: 1
+  Amount: 0
   Icon: {fileID: 21300000, guid: 60969861bb5377641b3921532fd1a913, type: 3}
