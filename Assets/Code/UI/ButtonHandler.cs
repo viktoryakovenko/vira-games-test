@@ -25,6 +25,16 @@ namespace Code.UI
             _button.onClick.RemoveListener(ExecuteCommand);
         }
 
+        public void EnableButton()
+        {
+            _button.interactable = true;
+        }
+
+        public void DisableButton()
+        {
+            _button.interactable = false;
+        }
+
         private void ExecuteCommand()
         {
             _command.Execute();
