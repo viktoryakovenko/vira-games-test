@@ -1,6 +1,6 @@
 ﻿namespace Code.Infrastructure.Services
 {
-    public interface IStaticDataService
+    public interface IStaticDataService : IService
     {
         void LoadPrizes();
     }
