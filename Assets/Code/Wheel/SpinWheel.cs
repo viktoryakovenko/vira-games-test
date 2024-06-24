@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Code.UI
+namespace Code.Wheel
 {
     public class SpinWheel : MonoBehaviour, ISpinWheel
     {
@@ -16,8 +16,6 @@ namespace Code.UI
         [SerializeField] private GameObject _rotationZone;
         [SerializeField] private GameObject _wheelSectors;
 
-        private float _currentRotationSpeed;
-
         public void Initialize(float initialRotationSpeed, float decelerationSpeed)
         {
             InitialRotationSpeed = initialRotationSpeed;
@@ -26,19 +24,19 @@ namespace Code.UI
 
         public void Spin()
         {
-            _currentRotationSpeed = InitialRotationSpeed;
+            float currentRotationSpeed = InitialRotationSpeed;
             OnSpinStarted?.Invoke();
-            StartCoroutine(StartSpin());
+            StartCoroutine(StartSpin(currentRotationSpeed));
         }
 
-        private IEnumerator StartSpin()
+        private IEnumerator StartSpin(float currentRotationSpeed)
         {
-            while (_currentRotationSpeed > 0)
+            while (currentRotationSpeed > 0)
             {
-                _currentRotationSpeed -= DecelerationSpeed * Time.deltaTime;
-                _currentRotationSpeed = Mathf.Max(_currentRotationSpeed, 0);
+                currentRotationSpeed -= DecelerationSpeed * Time.deltaTime;
+                currentRotationSpeed = Mathf.Max(currentRotationSpeed, 0);
 
-                _rotationZone.transform.rotation *= Quaternion.Euler(0, 0, _currentRotationSpeed * Time.deltaTime);
+                _rotationZone.transform.rotation *= Quaternion.Euler(0, 0, currentRotationSpeed * Time.deltaTime);
 
                 yield return null;
             }

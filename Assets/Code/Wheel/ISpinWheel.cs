@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Code.UI
+namespace Code.Wheel
 {
     public interface ISpinWheel
     {

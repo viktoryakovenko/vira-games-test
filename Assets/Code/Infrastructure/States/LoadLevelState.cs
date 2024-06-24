@@ -33,17 +33,17 @@ namespace Code.Infrastructure.States
 
         private void OnLoaded()
         {
-            InitGameWorld();
+            InitWheelGame();
 
             _stateMachine.Enter<GameLoopState>();
         }
 
-        private void InitGameWorld()
+        private void InitWheelGame()
         {
             Transform parentContainer = GameObject.FindWithTag(ParentContainer).transform;
 
             _gameFactory.CreateWheel(parentContainer);
-            _gameFactory.CreateSpinButton(parentContainer);
+            _gameFactory.CreateHUD(parentContainer);
         }
     }
 }

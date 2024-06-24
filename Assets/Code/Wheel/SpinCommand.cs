@@ -1,30 +1,39 @@
-﻿using UnityEngine;
+﻿using Code.UI;
+using UnityEngine;
 
-namespace Code.UI
+namespace Code.Wheel
 {
     [RequireComponent(typeof(ButtonHandler))]
     public class SpinCommand : MonoBehaviour, ICommand
     {
-        private SpinWheel _spinWheel;
         private ButtonHandler _buttonHandler;
+        private ISpinWheel _spinWheel;
+        private ISpinChecker _spinChecker;
 
-        public void Initialize(SpinWheel wheel)
+        public void Initialize(ISpinWheel wheel, ISpinChecker checker)
         {
             _spinWheel = wheel;
+            _spinChecker = checker;
             _buttonHandler = GetComponent<ButtonHandler>();
             _spinWheel.OnSpinStarted += _buttonHandler.DisableButton;
-            _spinWheel.OnSpinEnded += _buttonHandler.EnableButton;
+            _spinWheel.OnSpinEnded += CheckSpinCounts;
         }
 
         private void OnDestroy()
         {
             _spinWheel.OnSpinStarted -= _buttonHandler.DisableButton;
-            _spinWheel.OnSpinEnded -= _buttonHandler.EnableButton;
+            _spinWheel.OnSpinEnded -= CheckSpinCounts;
         }
 
         public void Execute()
         {
             _spinWheel.Spin();
+        }
+
+        private void CheckSpinCounts()
+        {
+            if (_spinChecker.CanSpin)
+                _buttonHandler.EnableButton();
         }
     }
 }

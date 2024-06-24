@@ -1,6 +1,7 @@
 using Code.Infrastructure.AssetManagement;
 using Code.StaticData;
 using Code.UI;
+using Code.Wheel;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,20 +26,27 @@ namespace Code.Infrastructure.Factory
             var spinWheel = _wheel.GetComponent<SpinWheel>();
             spinWheel.Initialize(data.SpinSpeed, data.StopSpeed);
 
+            var spinChecker = _wheel.GetComponent<SpinChecker>();
+            spinChecker.Initialize(spinWheel, data.SpinsCount);
+
             Transform wheelSectors = spinWheel.WheelSectors.transform;
             FillSectors(wheelSectors.transform, data.TotalItemPositions);
 
             return _wheel;
         }
 
-        public GameObject CreateSpinButton(Transform parent)
+        public GameObject CreateHUD(Transform parent)
         {
-            var spinButton = _assets.Instantiate(AssetPath.SpinButtonPath, parent);
+            var hud = _assets.Instantiate(AssetPath.HUDPath, parent);
 
-            var spinCommand = spinButton.GetComponent<SpinCommand>();
-            spinCommand.Initialize(_wheel.GetComponent<SpinWheel>());
+            var hudHandler = hud.GetComponent<HUDHandler>();
+            var spinCommand = hudHandler.SpinCommand;
+            spinCommand.Initialize(_wheel.GetComponent<ISpinWheel>(), _wheel.GetComponent<ISpinChecker>());
 
-            return spinButton;
+            var counter = hudHandler.Counter;
+            counter.Initialize(_wheel.GetComponent<ISpinChecker>() );
+
+            return hud;
         }
 
         private void FillSectors(Transform sectorContainer, int amount)
@@ -48,7 +56,9 @@ namespace Code.Infrastructure.Factory
                 GameObject sector = _assets.Instantiate(AssetPath.SectorPath, sectorContainer);
                 float hue = (float)i / amount;
                 float angle = i * 360.0f / amount;
-                sector.GetComponent<Image>().color = Color.HSVToRGB(hue, 100, 100);
+                var image = sector.GetComponent<Image>();
+                image.color = Color.HSVToRGB(hue, 1, 1);
+                image.fillAmount = 1.0f / amount;
                 sector.transform.rotation = Quaternion.Euler(0, 0, angle);
             }
         }

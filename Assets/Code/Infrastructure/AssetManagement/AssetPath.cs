@@ -4,6 +4,6 @@ namespace Code.Infrastructure.AssetManagement
     {
         public const string WheelPath = "Wheel/Wheel";
         public const string SectorPath = "Wheel/Sector";
-        public const string SpinButtonPath = "UI/SpinButton";
+        public const string HUDPath = "UI/HUD";
     }
 }
