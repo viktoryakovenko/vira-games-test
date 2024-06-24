@@ -9,25 +9,36 @@ namespace Code.UI
         public event Action OnSpinStarted;
         public event Action OnSpinEnded;
 
-        public float CurrentRotationSpeed { get; set; }
-        public float InitialRotationSpeed { get; private set; } = 3600f;
-        public float DecelerationSpeed { get; set; } = 720f;
+        public float InitialRotationSpeed { get; private set; }
+        public float DecelerationSpeed { get; private set; }
+        public GameObject WheelSectors => _wheelSectors;
+
+        [SerializeField] private GameObject _rotationZone;
+        [SerializeField] private GameObject _wheelSectors;
+
+        private float _currentRotationSpeed;
+
+        public void Initialize(float initialRotationSpeed, float decelerationSpeed)
+        {
+            InitialRotationSpeed = initialRotationSpeed;
+            DecelerationSpeed = decelerationSpeed;
+        }
 
         public void Spin()
         {
-            CurrentRotationSpeed = InitialRotationSpeed;
+            _currentRotationSpeed = InitialRotationSpeed;
             OnSpinStarted?.Invoke();
             StartCoroutine(StartSpin());
         }
 
         private IEnumerator StartSpin()
         {
-            while (CurrentRotationSpeed > 0)
+            while (_currentRotationSpeed > 0)
             {
-                CurrentRotationSpeed -= DecelerationSpeed * Time.deltaTime;
-                CurrentRotationSpeed = Mathf.Max(CurrentRotationSpeed, 0);
+                _currentRotationSpeed -= DecelerationSpeed * Time.deltaTime;
+                _currentRotationSpeed = Mathf.Max(_currentRotationSpeed, 0);
 
-                transform.rotation *= Quaternion.Euler(0, 0, CurrentRotationSpeed * Time.deltaTime);
+                _rotationZone.transform.rotation *= Quaternion.Euler(0, 0, _currentRotationSpeed * Time.deltaTime);
 
                 yield return null;
             }

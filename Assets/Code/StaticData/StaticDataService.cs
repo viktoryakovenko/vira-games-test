@@ -7,7 +7,9 @@ namespace Code.StaticData
 {
     public class StaticDataService : IStaticDataService
     {
-        private IReadOnlyList<PrizeStaticData> _prizes;
+        public int PrizesCount => _prizes.Count;
+
+        private List<PrizeStaticData> _prizes;
 
         public void LoadPrizes()
         {

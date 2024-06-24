@@ -6,11 +6,9 @@ namespace Code.StaticData
     [CreateAssetMenu(fileName = "SpinWheelData", menuName = "StaticData/SpinWheel")]
     public class SpinWheelStaticData : ScriptableObject
     {
-        [Min(1)] public int SpinsCount;
-        [Min(1)] public float SpinSpeed;
+        [Range(720f, 3600f)] public float SpinSpeed;
+        [Range(180f, 540f)] public float StopSpeed;
         [Min(2)] public int TotalItemPositions;
-        public List<PrizeStaticData> ItemList;
-
-        public GameObject Prefab;
+        [Min(1)] public int SpinsCount;
     }
 }

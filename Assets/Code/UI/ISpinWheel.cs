@@ -7,8 +7,7 @@ namespace Code.UI
         event Action OnSpinStarted;
         event Action OnSpinEnded;
         float InitialRotationSpeed { get; }
-        float CurrentRotationSpeed { get; set; }
-        float DecelerationSpeed { get; set; }
+        float DecelerationSpeed { get; }
         void Spin();
     }
 }

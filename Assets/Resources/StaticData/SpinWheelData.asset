@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1a99844f4a40da40bc5e6865d9513da, type: 3}
   m_Name: SpinWheelData
   m_EditorClassIdentifier: 
+  SpinSpeed: 3000
+  StopSpeed: 360
+  TotalItemPositions: 4
   SpinsCount: 4
-  SpinSpeed: 360
-  TotalItemPositions: 8
-  ItemList: []
-  Prefab: {fileID: 0}
