@@ -7,8 +7,8 @@ namespace Code.StaticData
     {
         [Range(0,1)] public float Weight;
         public bool IsUnique;
-        public int Count;
+        public int Amount;
 
-        public GameObject Prefab;
+        public Sprite Icon;
     }
 }
