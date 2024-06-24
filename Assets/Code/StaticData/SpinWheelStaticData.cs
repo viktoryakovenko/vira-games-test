@@ -9,7 +9,7 @@ namespace Code.StaticData
         [Min(1)] public int SpinsCount;
         [Min(1)] public float SpinSpeed;
         [Min(2)] public int TotalItemPositions;
-        public List<GameObject> ItemList;
+        public List<PrizeStaticData> ItemList;
 
         public GameObject Prefab;
     }
