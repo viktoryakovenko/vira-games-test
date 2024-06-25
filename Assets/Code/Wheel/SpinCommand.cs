@@ -21,8 +21,11 @@ namespace Code.Wheel
 
         private void OnDestroy()
         {
-            _spinWheel.OnSpinStarted -= _buttonHandler.DisableButton;
-            _spinWheel.OnSpinEnded -= CheckSpinCounts;
+            if (_spinWheel != null)
+            {
+                _spinWheel.OnSpinStarted -= _buttonHandler.DisableButton;
+                _spinWheel.OnSpinEnded -= CheckSpinCounts;
+            }
         }
 
         public void Execute()

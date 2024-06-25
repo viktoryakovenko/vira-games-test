@@ -11,12 +11,10 @@ namespace Code.Wheel
         public event Action OnSpinStarted;
         public event Action OnSpinEnded;
 
+        [SerializeField] private GameObject _rotationZone;
+
         public float InitialRotationSpeed { get; private set; }
         public int FullTurns { get; private set; }
-        public GameObject WheelSectors => _wheelSectors;
-
-        [SerializeField] private GameObject _rotationZone;
-        [SerializeField] private GameObject _wheelSectors;
 
         private IRandomService _randomService;
         private Win _win;
@@ -37,7 +35,7 @@ namespace Code.Wheel
 
         private IEnumerator StartSpin()
         {
-            var id = _win.GetWinItemId();
+            var id = _win.GetWinItem(out var prize);
             GetMinAndMaxAngles(id, out float prizeMinAngle, out float prizeMaxAngle);
 
             float currentRotationSpeed = InitialRotationSpeed;
@@ -69,7 +67,6 @@ namespace Code.Wheel
         private float GetSlowdownTime(int fullTurns, float currentRotationSpeed, float prizeMinAngle, float prizeMaxAngle)
         {
             float randomAngle = _randomService.Next(prizeMinAngle, prizeMaxAngle);
-            Debug.Log(randomAngle);
             float distance = 360f * fullTurns - randomAngle - _rotationZone.transform.eulerAngles.z;
             float slowdownTime = 2 * distance / currentRotationSpeed;
             return slowdownTime;

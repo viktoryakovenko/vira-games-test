@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Code.Infrastructure.Services.Randomizer;
 using Code.StaticData;
-using UnityEngine;
 
 namespace Code.Infrastructure.Services.PrizeService
 {
@@ -12,9 +10,6 @@ namespace Code.Infrastructure.Services.PrizeService
         private readonly IStaticDataService _dataService;
         private readonly IRandomService _randomService;
 
-        public int PrizesCount => _allPrizes.Count;
-
-        private List<PrizeStaticData> _currentPrizes = new List<PrizeStaticData>();
         private List<PrizeStaticData> _allPrizes = new List<PrizeStaticData>();
 
         public PrizeService(IStaticDataService dataService, IRandomService randomService)
@@ -32,5 +27,11 @@ namespace Code.Infrastructure.Services.PrizeService
                 .OrderBy(x => _randomService.Next(0, _allPrizes.Count))
                 .Take(count)
                 .ToList();
+
+        public void TryRemovePrize(PrizeStaticData prize)
+        {
+            if (_allPrizes.Contains(prize) && prize.IsUnique)
+                _allPrizes.Remove(prize);
+        }
     }
 }

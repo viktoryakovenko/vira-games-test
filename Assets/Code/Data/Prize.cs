@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace Code.Data
 {
     public class Prize

@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: SpinWheelData
   m_EditorClassIdentifier: 
   SpinSpeed: 3600
-  StopSpeed: 270
-  MinSpeed: 45
   TotalItemPositions: 4
-  SpinsCount: 1000
+  FullTurns: 6
+  SpinsCount: 40
