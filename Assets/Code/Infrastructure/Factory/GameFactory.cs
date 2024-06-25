@@ -65,14 +65,23 @@ namespace Code.Infrastructure.Factory
                 image.fillAmount = 1.0f / amount;
                 sector.transform.rotation = Quaternion.Euler(0, 0, angle);
 
-                SetSectorInfo(sector.transform, angle, randomPrizes[i]);
+                SetSectorInfo(sector.transform, image.fillAmount, randomPrizes[i]);
             }
         }
 
-        private void SetSectorInfo(Transform sector, float angle, PrizeStaticData prizeData)
+        private void SetSectorInfo(Transform sector, float fillAngle, PrizeStaticData prizeData)
         {
-            Debug.Log($"{angle/2} {prizeData.IsUnique}");
-            Object.Instantiate(prizeData.Prefab, sector);
+            var radians = (fillAngle - fillAngle / 2.0f) * 2.0f * Mathf.PI;
+            var delta = 75f * fillAngle;
+            float radius = (sector.GetComponent<RectTransform>().sizeDelta.x) / 2.0f - delta;
+
+            float x = radius * Mathf.Cos(radians);
+            float y = radius * Mathf.Sin(radians);
+            Vector3 position = new Vector3(-x, y, 0);
+
+            var prizeInfo = Object.Instantiate(prizeData.Prefab, sector);
+            prizeInfo.transform.localPosition = position;
+            prizeInfo.transform.localRotation = Quaternion.Euler(0, 0, - radians * 180.0f / Mathf.PI);
         }
     }
 }

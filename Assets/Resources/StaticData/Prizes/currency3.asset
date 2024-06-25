@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 33e3c50e852bf4a4fb6331ab686d2537, type: 3}
-  m_Name: currency1
+  m_Name: currency3
   m_EditorClassIdentifier: 
   Weight: 0
   IsUnique: 0
-  Amount: 20
+  Amount: 50
   Prefab: {fileID: 3799905933931593832, guid: 0196a04c24a585a4c9976badb76254df, type: 3}
