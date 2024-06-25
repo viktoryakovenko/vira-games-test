@@ -7,6 +7,5 @@ namespace Code.Infrastructure.Services.PrizeService
     {
         int PrizesCount { get; }
         IReadOnlyList<PrizeStaticData> GetRandomPrizesList(int count);
-        PrizeStaticData GetRandomPrize();
     }
 }

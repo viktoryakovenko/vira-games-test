@@ -7,7 +7,7 @@ namespace Code.Wheel
         event Action OnSpinStarted;
         event Action OnSpinEnded;
         float InitialRotationSpeed { get; }
-        float DecelerationSpeed { get; }
+        int FullTurns { get; }
         void Spin();
     }
 }

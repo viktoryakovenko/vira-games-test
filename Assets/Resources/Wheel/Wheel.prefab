@@ -46,8 +46,7 @@ GameObject:
   - component: {fileID: 3219202887274447877}
   - component: {fileID: 2303577494187095549}
   - component: {fileID: 8094122319156097087}
-  - component: {fileID: 3812370134461666632}
-  - component: {fileID: 8508224410277070419}
+  - component: {fileID: 924881554174459424}
   m_Layer: 5
   m_Name: Wheel
   m_TagString: Untagged
@@ -91,7 +90,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rotationZone: {fileID: 9163425508761466572}
   _wheelSectors: {fileID: 865698452104730887}
-  brakeFactor: 0.95
 --- !u!114 &8094122319156097087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,68 +102,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be9445e6b344c4049a3ae8f9b37aac76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!50 &3812370134461666632
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2469404404479043631}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 1
-  m_Constraints: 0
---- !u!58 &8508224410277070419
-CircleCollider2D:
+--- !u!114 &924881554174459424
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2469404404479043631}
   m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcf49661c58f42b89bea6a2b7267dc7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4777993218373274450
 GameObject:
   m_ObjectHideFlags: 0

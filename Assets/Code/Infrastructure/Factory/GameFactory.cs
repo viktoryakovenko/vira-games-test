@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using Code.Infrastructure.AssetManagement;
 using Code.Infrastructure.Services.PrizeService;
+using Code.Infrastructure.Services.Randomizer;
 using Code.StaticData;
 using Code.UI;
 using Code.Wheel;
@@ -11,13 +13,15 @@ namespace Code.Infrastructure.Factory
 {
     public class GameFactory : IGameFactory
     {
+        private readonly IRandomService _randomService;
         private readonly IPrizeService _prizeService;
         private readonly IAssets _assets;
 
         private GameObject _wheel;
 
-        public GameFactory(IAssets assets, IPrizeService prizeService)
+        public GameFactory(IRandomService randomService, IAssets assets, IPrizeService prizeService)
         {
+            _randomService = randomService;
             _prizeService = prizeService;
             _assets = assets;
         }
@@ -28,13 +32,16 @@ namespace Code.Infrastructure.Factory
             var data = Resources.Load<SpinWheelStaticData>("StaticData/SpinWheelData");
 
             var spinWheel = _wheel.GetComponent<SpinWheel>();
-            spinWheel.Initialize(data.SpinSpeed, data.StopSpeed, data.MinSpeed);
+            spinWheel.Initialize(_randomService, data.SpinSpeed, data.FullTurns);
 
             var spinChecker = _wheel.GetComponent<SpinChecker>();
             spinChecker.Initialize(spinWheel, data.SpinsCount);
 
+            var win = _wheel.GetComponent<Win>();
+            win.Initialize(_randomService, _prizeService, data.TotalItemPositions);
+
             Transform wheelSectors = spinWheel.WheelSectors.transform;
-            FillSectors(wheelSectors.transform, data.TotalItemPositions);
+            FillSectors(wheelSectors.transform, win.Prizes);
 
             return _wheel;
         }
@@ -53,17 +60,16 @@ namespace Code.Infrastructure.Factory
             return hud;
         }
 
-        private void FillSectors(Transform sectorContainer, int amount)
+        private void FillSectors(Transform sectorContainer, IReadOnlyList<PrizeStaticData> randomPrizes)
         {
-            var randomPrizes = _prizeService.GetRandomPrizesList(amount);
-            for (int i = 0; i < amount; i++)
+            for (int i = 0; i < randomPrizes.Count; i++)
             {
                 GameObject sector = _assets.Instantiate(AssetPath.SectorPath, sectorContainer);
-                float hue = (float)i / amount;
-                float angle = i * 360.0f / amount;
+                float hue = (float)i / randomPrizes.Count;
+                float angle = i * 360.0f / randomPrizes.Count;
                 var image = sector.GetComponent<Image>();
                 image.color = Color.HSVToRGB(hue, 1, 1);
-                image.fillAmount = 1.0f / amount;
+                image.fillAmount = 1.0f / randomPrizes.Count;
                 sector.transform.rotation = Quaternion.Euler(0, 0, angle);
 
                 SetSectorInfo(sector.transform, image.fillAmount, randomPrizes[i]);

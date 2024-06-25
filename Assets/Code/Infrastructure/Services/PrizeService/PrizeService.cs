@@ -28,23 +28,9 @@ namespace Code.Infrastructure.Services.PrizeService
         }
 
         public IReadOnlyList<PrizeStaticData> GetRandomPrizesList(int count) =>
-            _currentPrizes = _allPrizes
+            _allPrizes
                 .OrderBy(x => _randomService.Next(0, _allPrizes.Count))
                 .Take(count)
                 .ToList();
-
-        public PrizeStaticData GetRandomPrize()
-        {
-            int id = _randomService.Next(0, _currentPrizes.Count);
-
-            PrizeStaticData prizeData = _currentPrizes[id];
-
-            if (prizeData.IsUnique)
-            {
-                _allPrizes.Remove(prizeData);
-            }
-
-            return prizeData;
-        }
     }
 }

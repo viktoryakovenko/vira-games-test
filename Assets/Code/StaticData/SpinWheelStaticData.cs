@@ -7,9 +7,8 @@ namespace Code.StaticData
     public class SpinWheelStaticData : ScriptableObject
     {
         [Range(720f, 3600f)] public float SpinSpeed;
-        [Range(180f, 540f)] public float StopSpeed;
-        [Min(45)] public float MinSpeed;
         [Range(2, 8)] public int TotalItemPositions;
-        [Min(1)] public int SpinsCount;
+        [Min(2)] public int FullTurns;
+        [Range(2,100)] public int SpinsCount;
     }
 }
