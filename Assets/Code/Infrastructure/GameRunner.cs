@@ -10,7 +10,7 @@ namespace Code.Infrastructure
         {
             var bootstraper = FindObjectOfType<GameBootstrapper>();
 
-            if(bootstraper == null)
+            if (bootstraper == null)
             {
                 Instantiate(BootstrapperPrefab);
             }

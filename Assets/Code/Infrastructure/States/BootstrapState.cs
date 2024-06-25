@@ -1,6 +1,7 @@
 using Code.Infrastructure.AssetManagement;
 using Code.Infrastructure.Factory;
 using Code.Infrastructure.Services;
+using Code.Infrastructure.Services.PrizeService;
 using Code.Infrastructure.Services.Randomizer;
 using Code.StaticData;
 
@@ -40,7 +41,8 @@ namespace Code.Infrastructure.States
 
             _services.RegisterSingle<IRandomService>(new RandomService());
             _services.RegisterSingle<IAssets>(new AssetProvider());
-            _services.RegisterSingle<IGameFactory>(new GameFactory(_services.Single<IAssets>()));
+            _services.RegisterSingle<IPrizeService>(new PrizeService(_services.Single<IStaticDataService>(), _services.Single<IRandomService>()));
+            _services.RegisterSingle<IGameFactory>(new GameFactory(_services.Single<IAssets>(), _services.Single<IPrizeService>()));
         }
 
         private void RegisterStaticData()

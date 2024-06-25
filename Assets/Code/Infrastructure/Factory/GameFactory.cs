@@ -1,4 +1,5 @@
 using Code.Infrastructure.AssetManagement;
+using Code.Infrastructure.Services.PrizeService;
 using Code.StaticData;
 using Code.UI;
 using Code.Wheel;
@@ -9,12 +10,14 @@ namespace Code.Infrastructure.Factory
 {
     public class GameFactory : IGameFactory
     {
+        private readonly IPrizeService _prizeService;
         private readonly IAssets _assets;
 
         private GameObject _wheel;
 
-        public GameFactory(IAssets assets)
+        public GameFactory(IAssets assets, IPrizeService prizeService)
         {
+            _prizeService = prizeService;
             _assets = assets;
         }
 
@@ -51,6 +54,7 @@ namespace Code.Infrastructure.Factory
 
         private void FillSectors(Transform sectorContainer, int amount)
         {
+            var randomPrizes = _prizeService.GetRandomPrizesList(amount);
             for (int i = 0; i < amount; i++)
             {
                 GameObject sector = _assets.Instantiate(AssetPath.SectorPath, sectorContainer);
@@ -60,7 +64,15 @@ namespace Code.Infrastructure.Factory
                 image.color = Color.HSVToRGB(hue, 1, 1);
                 image.fillAmount = 1.0f / amount;
                 sector.transform.rotation = Quaternion.Euler(0, 0, angle);
+
+                SetSectorInfo(sector.transform, angle, randomPrizes[i]);
             }
+        }
+
+        private void SetSectorInfo(Transform sector, float angle, PrizeStaticData prizeData)
+        {
+            Debug.Log($"{angle/2} {prizeData.IsUnique}");
+            Object.Instantiate(prizeData.Icon, sector);
         }
     }
 }
