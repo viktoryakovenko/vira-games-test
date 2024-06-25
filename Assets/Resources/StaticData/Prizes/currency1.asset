@@ -15,4 +15,4 @@ MonoBehaviour:
   Weight: 0
   IsUnique: 0
   Amount: 20
-  Icon: {fileID: 21300000, guid: dc48a0b7477ae5943b1152dce9a20b7a, type: 3}
+  Prefab: {fileID: 33780526908214528, guid: 0196a04c24a585a4c9976badb76254df, type: 3}

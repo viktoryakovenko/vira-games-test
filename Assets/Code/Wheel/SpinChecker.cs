@@ -23,7 +23,10 @@ namespace Code.Wheel
 
         private void OnDestroy()
         {
-            _spinWheel.OnSpinStarted -= DecreaseCount;
+            if (_spinWheel != null)
+            {
+                _spinWheel.OnSpinStarted -= DecreaseCount;
+            }
         }
 
         private void DecreaseCount()

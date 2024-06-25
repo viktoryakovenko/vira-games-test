@@ -72,7 +72,7 @@ namespace Code.Infrastructure.Factory
         private void SetSectorInfo(Transform sector, float angle, PrizeStaticData prizeData)
         {
             Debug.Log($"{angle/2} {prizeData.IsUnique}");
-            Object.Instantiate(prizeData.Icon, sector);
+            Object.Instantiate(prizeData.Prefab, sector);
         }
     }
 }

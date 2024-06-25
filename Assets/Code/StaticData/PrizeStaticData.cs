@@ -9,6 +9,6 @@ namespace Code.StaticData
         public bool IsUnique;
         public int Amount;
 
-        public Sprite Icon;
+        public GameObject Prefab;
     }
 }
