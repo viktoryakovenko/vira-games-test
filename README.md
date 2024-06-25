@@ -21,4 +21,4 @@ Scripts from "Wheel" folder handle various functionalities of the Spin Wheel, li
 Bonuses, Currencies, Hud, Infrastructure, UI: Subfolders likely organize different types of resources related to bonuses, in-game currencies, user interface elements, and other infrastructure components.
 
 Package Description:
-[ReadMe.txt](https://github.com/user-attachments/files/15979397/ReadMe.txt)
+[ReadMe.txt](ReadMe.txt))
