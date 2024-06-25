@@ -19,3 +19,6 @@ ButtonHandler, Counter, HUDHandler, ICommand: Handle various user interface elem
 Scripts from "Wheel" folder handle various functionalities of the Spin Wheel, like checking spin validity, executing spin commands, and determining win conditions.
 
 Bonuses, Currencies, Hud, Infrastructure, UI: Subfolders likely organize different types of resources related to bonuses, in-game currencies, user interface elements, and other infrastructure components.
+
+Package Description:
+[ReadMe.txt](ReadMe.txt))
