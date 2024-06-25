@@ -14,6 +14,7 @@ namespace Code.Infrastructure.Services.PrizeService
 
         public int PrizesCount => _allPrizes.Count;
 
+        private List<PrizeStaticData> _currentPrizes = new List<PrizeStaticData>();
         private List<PrizeStaticData> _allPrizes = new List<PrizeStaticData>();
 
         public PrizeService(IStaticDataService dataService, IRandomService randomService)
@@ -27,21 +28,21 @@ namespace Code.Infrastructure.Services.PrizeService
         }
 
         public IReadOnlyList<PrizeStaticData> GetRandomPrizesList(int count) =>
-            _allPrizes
+            _currentPrizes = _allPrizes
                 .OrderBy(x => _randomService.Next(0, _allPrizes.Count))
                 .Take(count)
                 .ToList();
 
         public PrizeStaticData GetRandomPrize()
         {
-            int id = _randomService.Next(0, _allPrizes.Count);
+            int id = _randomService.Next(0, _currentPrizes.Count);
 
-            PrizeStaticData prizeData = _allPrizes[id];
+            PrizeStaticData prizeData = _currentPrizes[id];
 
             if (prizeData.IsUnique)
+            {
                 _allPrizes.Remove(prizeData);
-
-            Debug.Log($"{prizeData.IsUnique} {prizeData.Amount}");
+            }
 
             return prizeData;
         }

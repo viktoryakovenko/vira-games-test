@@ -8,7 +8,7 @@ namespace Code.StaticData
     {
         [Range(720f, 3600f)] public float SpinSpeed;
         [Range(180f, 540f)] public float StopSpeed;
-        [Min(2)] public int TotalItemPositions;
+        [Range(2, 8)] public int TotalItemPositions;
         [Min(1)] public int SpinsCount;
     }
 }
