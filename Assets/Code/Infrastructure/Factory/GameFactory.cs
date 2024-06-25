@@ -73,7 +73,7 @@ namespace Code.Infrastructure.Factory
         private void SetSectorInfo(Transform sector, float fillAngle, PrizeStaticData prizeData)
         {
             var radians = (fillAngle - fillAngle / 2.0f) * 2.0f * Mathf.PI;
-            var delta = 75f * fillAngle;
+            var delta = Mathf.Sqrt(1000f * fillAngle);
             float radius = (sector.GetComponent<RectTransform>().sizeDelta.x) / 2.0f - delta;
 
             float x = radius * Mathf.Cos(radians);
@@ -91,7 +91,7 @@ namespace Code.Infrastructure.Factory
 
         private static void SetItemText(Transform sector, PrizeStaticData prizeData, float radius, float radians)
         {
-            float delta = 0.7f * radius;
+            float delta = 0.65f * radius;
             float x = delta * Mathf.Cos(radians);
             float y = delta * Mathf.Sin(radians);
 
@@ -103,8 +103,7 @@ namespace Code.Infrastructure.Factory
 
             var text = rect.gameObject.AddComponent<TextMeshProUGUI>();
             text.text = prizeData.Amount.ToString();
-            text.fontSize = 7.5f;
-            rect.sizeDelta = new Vector2(10, 10);
+            text.fontSize = 7f;
             text.enableWordWrapping = false;
             text.alignment = TextAlignmentOptions.Center;
         }
