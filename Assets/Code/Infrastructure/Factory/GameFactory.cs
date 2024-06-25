@@ -28,7 +28,7 @@ namespace Code.Infrastructure.Factory
             var data = Resources.Load<SpinWheelStaticData>("StaticData/SpinWheelData");
 
             var spinWheel = _wheel.GetComponent<SpinWheel>();
-            spinWheel.Initialize(data.SpinSpeed, data.StopSpeed);
+            spinWheel.Initialize(data.SpinSpeed, data.StopSpeed, data.MinSpeed);
 
             var spinChecker = _wheel.GetComponent<SpinChecker>();
             spinChecker.Initialize(spinWheel, data.SpinsCount);

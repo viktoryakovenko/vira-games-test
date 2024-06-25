@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpinSpeed: 720
   StopSpeed: 540
-  TotalItemPositions: 8
-  SpinsCount: 2
+  TotalItemPositions: 2
+  SpinsCount: 1000
